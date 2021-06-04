@@ -42,8 +42,10 @@ public class EmployeeService {
 	public Boolean updateEmployeeData(UiEmployee employeeBean) {
 		Optional<Employee> employeeEntityOptional = employeeRepository.findById(employeeBean.getId()) ;
 		Boolean isValueUpdated = false;
+		
 		if (employeeEntityOptional.isPresent()) {
-			Employee employeeEntity = setEntityClassAttributes(employeeBean);
+			Employee employeeEntity = employeeEntityOptional.get();
+			employeeEntity = setEntityClassAttributes(employeeBean,employeeEntity);
 			employeeRepository.save(employeeEntity) ;
 
 			isValueUpdated = true;
@@ -51,12 +53,10 @@ public class EmployeeService {
 		return isValueUpdated ;
 	}
 	
-	public Employee setEntityClassAttributes(UiEmployee employeeBean) {
-		Employee employeeEntity = new Employee();
-		
+	public Employee setEntityClassAttributes(UiEmployee employeeBean,Employee employeeEntity) {
 		employeeEntity.setAddress(employeeBean.getAddress());
 		employeeEntity.setEmail(employeeBean.getEmail());
-		employeeEntity.setJobProfileId(employeeBean.getJobProfileId());
+		employeeEntity.setJobProfile(employeeBean.getJobProfile());
 		
 		return employeeEntity;
 	}
@@ -64,9 +64,13 @@ public class EmployeeService {
 	public UiEmployee setUiClassAttributes(Employee employeeEntity) {
 		UiEmployee employeeBean = new UiEmployee();
 		
+		employeeBean.setId(employeeEntity.getId());
+		employeeBean.setFirstName(employeeEntity.getFirstName());
+		employeeBean.setLastName(employeeEntity.getLastName());
 		employeeBean.setAddress(employeeEntity.getAddress());
 		employeeBean.setEmail(employeeEntity.getEmail());
-		employeeBean.setJobProfileId(employeeEntity.getJobProfileId());
+		employeeBean.setDateOfJoining(employeeEntity.getDateOfJoining());
+		employeeBean.setJobProfile(employeeEntity.getJobProfile());
 		
 		return employeeBean;
 	}

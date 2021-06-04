@@ -9,14 +9,14 @@ public class UiEmployee {
 	private String address;
 	private String email;
 	private Date dateOfJoining;
-	private Integer jobProfileId;
+	private String jobProfile;
 
 	public UiEmployee() {
 		super();
 	}
 
 	public UiEmployee(Integer id, String firstName, String lastName, String address, String email, Date dateOfJoining,
-			Integer jobProfileId) {
+			String jobProfile) {
 		super();
 		this.id = id;
 		this.firstName = firstName;
@@ -24,7 +24,7 @@ public class UiEmployee {
 		this.address = address;
 		this.email = email;
 		this.dateOfJoining = dateOfJoining;
-		this.jobProfileId = jobProfileId;
+		this.jobProfile = jobProfile;
 	}
 
 	public Integer getId() {
@@ -75,11 +75,11 @@ public class UiEmployee {
 		this.dateOfJoining = dateOfJoining;
 	}
 
-	public Integer getJobProfileId() {
-		return jobProfileId;
+	public String getJobProfile() {
+		return jobProfile;
 	}
 
-	public void setJobProfileId(Integer jobProfileId) {
-		this.jobProfileId = jobProfileId;
+	public void setJobProfile(String jobProfile) {
+		this.jobProfile = jobProfile;
 	}
 }

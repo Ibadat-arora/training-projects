@@ -5,7 +5,6 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.ManyToOne;
 
 @Entity
 public class Employee {
@@ -17,14 +16,14 @@ public class Employee {
 	private String address;
 	private String email;
 	private Date dateOfJoining;
-	private Integer jobProfileId;
+	private String jobProfile;
 
 	public Employee() {
 		super();
 	}
 
 	public Employee(Integer id, String firstName, String lastName, String address, String email, Date dateOfJoining,
-			Integer jobProfileId) {
+			String jobProfile) {
 		super();
 		this.id = id;
 		this.firstName = firstName;
@@ -32,7 +31,7 @@ public class Employee {
 		this.address = address;
 		this.email = email;
 		this.dateOfJoining = dateOfJoining;
-		this.jobProfileId = jobProfileId;
+		this.jobProfile = jobProfile;
 	}
 
 	public Integer getId() {
@@ -83,11 +82,11 @@ public class Employee {
 		this.dateOfJoining = dateOfJoining;
 	}
 
-	public Integer getJobProfileId() {
-		return jobProfileId;
+	public String getJobProfile() {
+		return jobProfile;
 	}
 
-	public void setJobProfileId(Integer jobProfileId) {
-		this.jobProfileId = jobProfileId;
+	public void setJobProfile(String jobProfile) {
+		this.jobProfile = jobProfile;
 	}
 }
