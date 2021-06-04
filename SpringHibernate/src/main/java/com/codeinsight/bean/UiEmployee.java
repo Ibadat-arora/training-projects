@@ -2,6 +2,8 @@ package com.codeinsight.bean;
 
 import java.util.Date;
 
+import com.codeinsight.entity.JobProfile;
+
 public class UiEmployee {
 	private Integer id;
 	private String firstName;
@@ -9,14 +11,14 @@ public class UiEmployee {
 	private String address;
 	private String email;
 	private Date dateOfJoining;
-	private String jobProfile;
+	private JobProfile jobProfile;
 
 	public UiEmployee() {
 		super();
 	}
 
 	public UiEmployee(Integer id, String firstName, String lastName, String address, String email, Date dateOfJoining,
-			String jobProfile) {
+			JobProfile jobProfile) {
 		super();
 		this.id = id;
 		this.firstName = firstName;
@@ -75,11 +77,11 @@ public class UiEmployee {
 		this.dateOfJoining = dateOfJoining;
 	}
 
-	public String getJobProfile() {
+	public JobProfile getJobProfile() {
 		return jobProfile;
 	}
 
-	public void setJobProfile(String jobProfile) {
+	public void setJobProfile(JobProfile jobProfile) {
 		this.jobProfile = jobProfile;
 	}
 }

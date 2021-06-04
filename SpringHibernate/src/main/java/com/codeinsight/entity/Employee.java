@@ -1,12 +1,17 @@
 package com.codeinsight.entity;
 
 import java.util.Date;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
 
 @Entity
+@Table(name="employee")
 public class Employee {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
@@ -16,21 +21,23 @@ public class Employee {
 	private String address;
 	private String email;
 	private Date dateOfJoining;
-	private String jobProfile;
+	
+	@ManyToOne(cascade=CascadeType.ALL)
+	private JobProfile jobProfile;
 
 	public Employee() {
 		super();
 	}
 
 	public Employee(Integer id, String firstName, String lastName, String address, String email, Date dateOfJoining,
-			String jobProfile) {
+			JobProfile jobProfile) {
 		super();
 		this.id = id;
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.address = address;
 		this.email = email;
-		this.dateOfJoining = dateOfJoining;
+		this.dateOfJoining = dateOfJoining;  
 		this.jobProfile = jobProfile;
 	}
 
@@ -82,11 +89,11 @@ public class Employee {
 		this.dateOfJoining = dateOfJoining;
 	}
 
-	public String getJobProfile() {
+	public JobProfile getJobProfile() {
 		return jobProfile;
 	}
 
-	public void setJobProfile(String jobProfile) {
+	public void setJobProfile(JobProfile jobProfile) {
 		this.jobProfile = jobProfile;
 	}
 }

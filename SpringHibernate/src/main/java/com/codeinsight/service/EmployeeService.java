@@ -56,6 +56,7 @@ public class EmployeeService {
 	public Employee setEntityClassAttributes(UiEmployee employeeBean,Employee employeeEntity) {
 		employeeEntity.setAddress(employeeBean.getAddress());
 		employeeEntity.setEmail(employeeBean.getEmail());
+		
 		employeeEntity.setJobProfile(employeeBean.getJobProfile());
 		
 		return employeeEntity;
