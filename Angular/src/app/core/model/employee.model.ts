@@ -7,7 +7,7 @@ export class Employee implements Deserializable {
   address: string = "";
   email: string = "";
   dateOfJoining: Date = new Date();
-  jobProfile: string = "";
+  jobProfileName: string = "";
 
   deserialize(input: any) {
     Object.assign(this, input);
