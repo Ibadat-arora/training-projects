@@ -83,11 +83,11 @@ public class Employee {
 		this.dateOfJoining = dateOfJoining;
 	}
 
-	public Integer getJobProfile() {
+	public Integer getJobProfileId() {
 		return jobProfileId;
 	}
 
-	public void setJobProfile(Integer jobProfileId) {
+	public void setJobProfileId(Integer jobProfileId) {
 		this.jobProfileId = jobProfileId;
 	}
 }

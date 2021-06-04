@@ -56,7 +56,7 @@ public class EmployeeService {
 		
 		employeeEntity.setAddress(employeeBean.getAddress());
 		employeeEntity.setEmail(employeeBean.getEmail());
-		employeeEntity.setJobProfile(employeeBean.getJobProfile());
+		employeeEntity.setJobProfileId(employeeBean.getJobProfileId());
 		
 		return employeeEntity;
 	}
@@ -66,7 +66,7 @@ public class EmployeeService {
 		
 		employeeBean.setAddress(employeeEntity.getAddress());
 		employeeBean.setEmail(employeeEntity.getEmail());
-		employeeBean.setJobProfile(employeeEntity.getJobProfile());
+		employeeBean.setJobProfileId(employeeEntity.getJobProfileId());
 		
 		return employeeBean;
 	}
