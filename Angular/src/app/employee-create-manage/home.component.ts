@@ -21,13 +21,12 @@ export class HomeComponent implements OnInit {
     { jobId: 4, jobName: "HR" }
   ];
 
-
   employeeForm : FormGroup = this.formBuilder.group(new Employee(),{formArray : false}) ;
 
   constructor(private activatedRoute: ActivatedRoute, 
     private router: Router, 
     private employeeService: EmployeeService,
-    private _snackBar: MatSnackBar,
+    private snackBar: MatSnackBar,
     private formBuilder : FormBuilder) { }
 
   ngOnInit(): void {
@@ -39,7 +38,7 @@ export class HomeComponent implements OnInit {
   }
 
   autoFillUserValues() { 
-    this._snackBar.open("values will autofill","ok");
+    this.snackBar.open("values will autofill","ok");
     this.employeeService.getEmployeeById(2).subscribe((response : Employee)=> {
       this.employeeForm.patchValue(response) ;
     });
@@ -60,9 +59,9 @@ export class HomeComponent implements OnInit {
   updateEmployeeData(){
     this.employeeService.updateEmployeeData(this.employee).subscribe(response =>{
       if(response == true){
-        this._snackBar.open("Data has been submitted","ok");
+        this.snackBar.open("Data has been submitted","ok");
       }else{
-        this._snackBar.open("Data not submitted","ok");
+        this.snackBar.open("Data not submitted","ok");
       }
     }
       ) ;

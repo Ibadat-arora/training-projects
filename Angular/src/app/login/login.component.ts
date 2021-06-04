@@ -15,7 +15,7 @@ export class LoginComponent implements OnInit {
   password: string = "";
 
   constructor(private activatedRoute:ActivatedRoute,private router: Router,private service:LoginService,
-    private _snackBar: MatSnackBar) { }
+    private snackBar: MatSnackBar) { }
   
 
   loginForm = new FormGroup({
@@ -42,7 +42,7 @@ export class LoginComponent implements OnInit {
 
   authenticatePost(){
     if (this.validateEmail() != true) {
-      this._snackBar.open("Incorrect email format","ok");
+      this.snackBar.open("Incorrect email format","ok");
     } else {
       let loginRequest : LoginRequest = {};
       loginRequest.email = this.email ;
@@ -53,7 +53,7 @@ export class LoginComponent implements OnInit {
             
             this.router.navigate(['/home']);
           }else{
-            this._snackBar.open("Invalid credentials","ok");
+            this.snackBar.open("Invalid credentials","ok");
           } 
         } );
     }
