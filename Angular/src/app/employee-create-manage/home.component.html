@@ -1,0 +1,61 @@
+<form>
+<div class='row'>
+    <div class='col-4 offset-4 card m-t-2-p p-40'>
+        <h3>Welcome To home page. Please fill the following information.</h3>
+        <div class="row mb-3">
+            <mat-form-field appearance="legacy" class="col-12">
+                <mat-label>FirstName</mat-label>
+                <div class="col-sm-10">
+                    <input matInput [(ngModel)]="employee.firstName" name="firstName" required>
+                </div>
+            </mat-form-field>
+        </div>
+        <div class="row mb-3">
+            <mat-form-field appearance="legacy" class="col-12">
+                <mat-label>LastName</mat-label>
+                <div class="col-sm-10">
+                    <input matInput [(ngModel)]="employee.lastName" name="lastName" required>
+                </div>
+            </mat-form-field>
+        </div>
+        <div class="row mb-3">
+            <mat-form-field appearance="legacy" class="col-12">
+                <mat-label>Address</mat-label>
+                <div class="col-sm-10">
+                    <input matInput [(ngModel)]="employee.address" name="address" required>
+                </div>
+            </mat-form-field>
+        </div>
+        <div class="row mb-3">
+            <mat-form-field appearance="legacy" class="col-12">
+                <mat-label>Email</mat-label>
+                <div class="col-sm-10">
+                    <input matInput [(ngModel)]="employee.email" name="email" required>
+                </div>
+            </mat-form-field>
+        </div>
+        <div>
+            <mat-form-field class="col-12">
+                <mat-label>Date of Joining</mat-label>
+                <input matInput [matDatepicker]="picker" [(ngModel)]="employee.dateOfJoining" name = "dateOfJoining" required>
+                <mat-datepicker-toggle matSuffix [for]="picker" ></mat-datepicker-toggle>
+                <mat-datepicker #picker></mat-datepicker>
+            </mat-form-field>
+        </div>
+        <div>
+            <mat-form-field class="col-12">
+                <mat-label>Select job profile</mat-label>
+                <input matInput>
+                <mat-select [(ngModel)] = "employee.jobProfile" name = "jobProfile" required>
+                   <mat-option *ngFor="let profile of jobProfiles " [value]="profile.jobName">
+                    {{profile.jobName}}
+                   </mat-option>
+                </mat-select>
+            </mat-form-field>
+        </div>
+        <div class="col-4">
+            <button mat-stroked-button class="btn btn-primary" (click)="updateEmployeeData()">Submit</button>
+        </div>
+    </div>
+</div>
+</form>
