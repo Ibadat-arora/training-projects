@@ -1,11 +1,11 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { HomeComponent } from "./employee-create-manage/home.component";
+import { EmployeeCreateManage } from "./employee-create-manage/employee-create-manage.component";
 import { LoginComponent } from './login/login.component';
 
 const routes: Routes = [
   { path: '', redirectTo:"login",pathMatch:"full" },
-  { path: 'home', component: HomeComponent },
+  { path: 'home', component: EmployeeCreateManage },
   { path: 'login', component: LoginComponent }
 ];
 

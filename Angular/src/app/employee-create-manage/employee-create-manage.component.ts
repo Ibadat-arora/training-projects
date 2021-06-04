@@ -8,11 +8,11 @@ import {MatSnackBar} from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-home',
-  templateUrl: './home.component.html',
-  styleUrls: ['./home.component.css']
+  templateUrl: './employee-create-manage.component.html',
+  styleUrls: ['./employee-create-manage.component.css']
 })
 
-export class HomeComponent implements OnInit {
+export class EmployeeCreateManage implements OnInit {
   
   jobProfiles: jobProfile[] = [
     { jobId: 1, jobName: "Developer" },
