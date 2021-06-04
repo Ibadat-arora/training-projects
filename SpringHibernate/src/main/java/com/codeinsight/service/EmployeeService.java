@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import com.codeinsight.bean.UiEmployee;
 import com.codeinsight.dao.EmployeeRepository;
 import com.codeinsight.entity.Employee;
+import com.codeinsight.entity.JobProfile;
 
 @Service
 public class EmployeeService {
@@ -57,8 +58,6 @@ public class EmployeeService {
 		employeeEntity.setAddress(employeeBean.getAddress());
 		employeeEntity.setEmail(employeeBean.getEmail());
 		
-		employeeEntity.setJobProfile(employeeBean.getJobProfile());
-		
 		return employeeEntity;
 	}
 	
@@ -71,7 +70,9 @@ public class EmployeeService {
 		employeeBean.setAddress(employeeEntity.getAddress());
 		employeeBean.setEmail(employeeEntity.getEmail());
 		employeeBean.setDateOfJoining(employeeEntity.getDateOfJoining());
-		employeeBean.setJobProfile(employeeEntity.getJobProfile());
+		
+		JobProfile jobProfile = employeeEntity.getJobProfile() ;
+		employeeBean.setJobProfileName(jobProfile.getJobProfileName());
 		
 		return employeeBean;
 	}
