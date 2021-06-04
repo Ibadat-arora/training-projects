@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms'
+import { FormBuilder, FormControl, FormGroup } from '@angular/forms'
 import { jobProfile } from '../jobProfile.component'
 import { ActivatedRoute, Router } from '@angular/router'
 import { EmployeeService } from '../core/service/employee.service';
@@ -21,21 +21,27 @@ export class HomeComponent implements OnInit {
     { jobId: 4, jobName: "HR" }
   ];
 
-  employee: Employee = new Employee ;
+
+  employeeForm : FormGroup = this.formBuilder.group(new Employee(),{formArray : false}) ;
 
   constructor(private activatedRoute: ActivatedRoute, 
     private router: Router, 
     private employeeService: EmployeeService,
-    private _snackBar: MatSnackBar) { }
+    private _snackBar: MatSnackBar,
+    private formBuilder : FormBuilder) { }
 
   ngOnInit(): void {
     this.validateSessionStorage();
   }
 
+  get employee() : Employee {
+    return this.employeeForm.getRawValue() as Employee ;
+  }
+
   autoFillUserValues() { 
     this._snackBar.open("values will autofill","ok");
     this.employeeService.getEmployeeById(2).subscribe((response : Employee)=> {
-      this.employee = response ;
+      this.employeeForm.patchValue(response) ;
     });
   }
 
