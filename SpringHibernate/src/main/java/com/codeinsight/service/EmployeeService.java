@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.codeinsight.bean.UiEmployee;
 import com.codeinsight.dao.EmployeeRepository;
+import com.codeinsight.dao.JobProfileRepository;
 import com.codeinsight.entity.Employee;
 import com.codeinsight.entity.JobProfile;
 
@@ -14,6 +15,9 @@ import com.codeinsight.entity.JobProfile;
 public class EmployeeService {
 	@Autowired
 	private EmployeeRepository employeeRepository;
+	
+	@Autowired
+	private JobProfileRepository jobProfileRepository ;
 
 	public UiEmployee getEmployeeById(Integer id) {
 		Optional<Employee> employeeEntityOptional = employeeRepository.findById(id);
@@ -58,6 +62,10 @@ public class EmployeeService {
 		employeeEntity.setAddress(employeeBean.getAddress());
 		employeeEntity.setEmail(employeeBean.getEmail());
 		
+		Optional<JobProfile> jobProfileEntityOptional = jobProfileRepository.findById(employeeBean.getJobProfileId()) ;
+		JobProfile jobProfileEntity = jobProfileEntityOptional.get();
+		employeeEntity.setJobProfile(jobProfileEntity);
+		
 		return employeeEntity;
 	}
 	
@@ -72,7 +80,7 @@ public class EmployeeService {
 		employeeBean.setDateOfJoining(employeeEntity.getDateOfJoining());
 		
 		JobProfile jobProfile = employeeEntity.getJobProfile() ;
-		employeeBean.setJobProfileName(jobProfile.getJobProfileName());
+		employeeBean.setJobProfileId(jobProfile.getId());
 		
 		return employeeBean;
 	}
