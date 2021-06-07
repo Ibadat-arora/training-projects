@@ -1,10 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup } from '@angular/forms'
-import { jobProfile } from '../jobProfile.component'
 import { ActivatedRoute, Router } from '@angular/router'
 import { EmployeeService } from '../core/service/employee.service';
 import { Employee } from '../core/model/employee.model';
 import {MatSnackBar} from '@angular/material/snack-bar';
+import { JobProfileService } from '../core/service/job-profile.service';
+import { JobProfile } from '../core/jobProfile/jobProfile.model';
 
 @Component({
   selector: 'app-home',
@@ -14,12 +15,7 @@ import {MatSnackBar} from '@angular/material/snack-bar';
 
 export class EmployeeCreateManage implements OnInit {
   
-  jobProfiles: jobProfile[] = [
-    { jobId: 1, jobName: "Developer" },
-    { jobId: 2, jobName: "Tester" },
-    { jobId: 3, jobName: "Product Manager" },
-    { jobId: 4, jobName: "HR" }
-  ];
+  jobProfiles : JobProfile[] = [] ;
 
   employeeForm : FormGroup = this.formBuilder.group(new Employee(),{formArray : false}) ;
 
@@ -27,7 +23,8 @@ export class EmployeeCreateManage implements OnInit {
     private router: Router, 
     private employeeService: EmployeeService,
     private snackBar: MatSnackBar,
-    private formBuilder : FormBuilder) { }
+    private formBuilder : FormBuilder,
+    private jobProfileService : JobProfileService) { }
 
   ngOnInit(): void {
     this.validateSessionStorage();
@@ -48,12 +45,13 @@ export class EmployeeCreateManage implements OnInit {
     if (sessionStorage.getItem("setSessionFlag") == "false") {
       this.redirectToLoginPage();
     } else {
+      this.getAllJobProfiles();
       this.autoFillUserValues();
     }
   }
 
   redirectToLoginPage() {
-    this.router.navigate(['/login']);;
+    this.router.navigate(['/login']);
   }
 
   updateEmployeeData(){
@@ -65,5 +63,11 @@ export class EmployeeCreateManage implements OnInit {
       }
     }
       ) ;
+  }
+
+  getAllJobProfiles(){
+    this.jobProfileService.getAllJobProfiles().subscribe(response =>{
+      this.jobProfiles = response ;
+    })
   }
 }

@@ -45,10 +45,10 @@
         <div>
             <mat-form-field class="col-12">
                 <mat-label>Select job profile</mat-label>
-                <input matInput name = "jobProfileName" formControlName="jobProfileName"  required >
-                <mat-select>
-                   <mat-option *ngFor="let profile of jobProfiles " [value]="profile.jobName">
-                    {{profile.jobName}}
+                <input matInput >
+                <mat-select name = "jobProfileId" formControlName="jobProfileId"  required>
+                   <mat-option *ngFor="let jobProfile of jobProfiles " [value]="jobProfile.id">
+                    {{jobProfile.jobProfileName}}
                    </mat-option>
                 </mat-select>
             </mat-form-field>
