@@ -2,6 +2,7 @@ package com.codeinsight.controller;
 
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import com.codeinsight.bean.LoginRequest;
 
@@ -19,5 +20,10 @@ public class LoginController {
 		}
 
 		return isLoginCredentialsCorrect;
+	}
+	
+	@RequestMapping({ "/hello" })
+	public String firstPage() {
+		return "Hello World";
 	}
 }
