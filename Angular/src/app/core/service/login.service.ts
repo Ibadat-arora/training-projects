@@ -1,19 +1,20 @@
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { Observable, throwError } from 'rxjs';
-import { catchError, retry } from 'rxjs/operators';
-import { LoginRequest } from '../../login/login.model';
+import { LoginRequest } from 'src/app/login/loginRequest.model';
 import { environment } from 'src/environments/environment';
+import { Observable, throwError } from 'rxjs';
+import { LoginResponse } from 'src/app/login/loginResponse.model';
 
 @Injectable({
   providedIn: 'root'
 })
-export class LoginService {
-  private url = environment.hosturl + '/login';
-   
-  constructor(private httpClient: HttpClient) { }
+export class JwtService {
 
-  authenticate(loginRequest : LoginRequest){
-    return this.httpClient.post(this.url,loginRequest);
+  constructor(private httpClient:HttpClient) { }
+
+   login(loginRequest : LoginRequest ):Observable<LoginResponse>{
+    let url = environment.hosturl + '/authenticate';
+
+    return this.httpClient.post<LoginResponse>(url,loginRequest) ;
   }
 }

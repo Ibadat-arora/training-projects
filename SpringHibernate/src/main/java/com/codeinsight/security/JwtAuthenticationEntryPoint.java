@@ -1,4 +1,4 @@
-package com.codeinsight.jwtconfiguration;
+package com.codeinsight.security;
 
 import java.io.IOException;
 import java.io.Serializable;

@@ -12,9 +12,10 @@ import {MatDatepickerModule} from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
 import {MatSelectModule} from '@angular/material/select';
 import {ReactiveFormsModule} from '@angular/forms' ;
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
 import { EmployeeCreateManage } from './employee-create-manage/employee-create-manage.component';
+import { UrlInterceptor } from './core/service/UrlInterceptor.service';
 
 @NgModule({
   declarations: [
@@ -36,7 +37,13 @@ import { EmployeeCreateManage } from './employee-create-manage/employee-create-m
     HttpClientModule,
     MatSnackBarModule
   ],
-  providers: [],
+  providers: [
+    {
+    provide : HTTP_INTERCEPTORS,
+    useClass : UrlInterceptor ,
+    multi : true 
+  }
+],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -14,7 +14,7 @@ import com.codeinsight.entity.UserEntity;
 
 @Service
 
-public class JWTUserDetailsService implements UserDetailsService {
+public class AppUserDetailsService implements UserDetailsService {
 
 	@Autowired
 	private UserRepository userRepository;

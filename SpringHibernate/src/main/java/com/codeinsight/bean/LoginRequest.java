@@ -1,19 +1,30 @@
 package com.codeinsight.bean;
 
-public class LoginRequest {
-	private String email;
-	private String password;
+import java.io.Serializable;
 
-	public String getEmail() {
-		return email;
+public class LoginRequest implements Serializable {
+
+	private static final long serialVersionUID = 5926468583005150707L;
+	
+	private String username;
+	private String password;
+	
+	//need default constructor for JSON Parsing
+	public LoginRequest(String username, String password) {
+		this.setUsername(username);
+		this.setPassword(password);
 	}
 
-	public void setEmail(String email) {
-		this.email = email;
+	public String getUsername() {
+		return this.username;
+	}
+
+	public void setUsername(String username) {
+		this.username = username;
 	}
 
 	public String getPassword() {
-		return password;
+		return this.password;
 	}
 
 	public void setPassword(String password) {
