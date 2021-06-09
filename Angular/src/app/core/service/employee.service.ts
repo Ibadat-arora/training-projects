@@ -13,7 +13,7 @@ export class EmployeeService {
     constructor(private httpClient: HttpClient) { }
 
     getEmployeeById(employeeId: number):Observable<Employee> {
-        let url = environment.hosturl + '/employee/' + employeeId;
+        let url = environment.hosturl +'/employee/' + employeeId;
 
         return this.httpClient.get<Employee>(url);
     }

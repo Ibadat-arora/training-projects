@@ -59,7 +59,7 @@ export class EmployeeCreateManage implements OnInit {
       if(response == true){
         this.snackBar.open("Data has been submitted","ok");
       }else{
-        this.snackBar.open("Data not submitted","ok");
+        this.snackBar.open("This role cannot update the data","ok");
       }
     }
       ) ;

@@ -11,8 +11,8 @@ export class UrlInterceptor implements HttpInterceptor{
         const tokenValue = sessionStorage.getItem("tokenValue") ;
 
         if(tokenValue) {
-            const clonedReq = request.clone({
-                headers : request.headers.set("Authorization", "Bearer " + tokenValue ) 
+           const clonedReq = request.clone({
+                headers : request.headers.set("Authorization","Bearer " + tokenValue ) 
             }) ;
 
             return next.handle(clonedReq);
