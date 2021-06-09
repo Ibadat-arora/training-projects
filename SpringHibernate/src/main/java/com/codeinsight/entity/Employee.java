@@ -24,22 +24,9 @@ public class Employee {
 	
 	@ManyToOne(cascade=CascadeType.ALL)
 	private JobProfile jobProfile;
-
-	public Employee() {
-		super();
-	}
-
-	public Employee(Integer id, String firstName, String lastName, String address, String email, Date dateOfJoining,
-			JobProfile jobProfile) {
-		super();
-		this.id = id;
-		this.firstName = firstName;
-		this.lastName = lastName;
-		this.address = address;
-		this.email = email;
-		this.dateOfJoining = dateOfJoining;  
-		this.jobProfile = jobProfile;
-	}
+	
+	@ManyToOne(cascade=CascadeType.ALL)
+	private UserRole userRole;
 
 	public Integer getId() {
 		return id;
@@ -95,5 +82,13 @@ public class Employee {
 
 	public void setJobProfile(JobProfile jobProfile) {
 		this.jobProfile = jobProfile;
+	}
+	
+	public UserRole getUserRole() {
+		return userRole;
+	}
+
+	public void setUserRole(UserRole userRole) {
+		this.userRole = userRole;
 	}
 }
