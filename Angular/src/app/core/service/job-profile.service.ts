@@ -12,7 +12,7 @@ export class JobProfileService {
   constructor(private httpClient: HttpClient) { }
 
   getAllJobProfiles():Observable<JobProfile[]>{
-    let url = environment.hosturl + '/jobProfile';
+    let url = '/jobProfile';
 
     return this.httpClient.get<JobProfile[]>(url);
   }

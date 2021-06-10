@@ -16,9 +16,8 @@ import { JobProfile } from '../core/jobProfile/jobProfile.model';
 export class EmployeeCreateManage implements OnInit {
   
   jobProfiles : JobProfile[] = [] ;
-
   employeeForm : FormGroup = this.formBuilder.group(new Employee(),{formArray : false}) ;
-
+  
   constructor(private activatedRoute: ActivatedRoute, 
     private router: Router, 
     private employeeService: EmployeeService,
@@ -36,7 +35,10 @@ export class EmployeeCreateManage implements OnInit {
 
   autoFillUserValues() { 
     this.snackBar.open("values will autofill","ok");
-    this.employeeService.getEmployeeById(2).subscribe((response : Employee)=> {
+    const employeeId: string | any = sessionStorage.getItem('employeeId');
+    employeeId !== null || employeeId === undefined ? JSON.parse(employeeId) : undefined;
+    console.log(employeeId) ;
+    this.employeeService.getEmployeeById(employeeId).subscribe((response : Employee)=> {
       this.employeeForm.patchValue(response) ;
     });
   }

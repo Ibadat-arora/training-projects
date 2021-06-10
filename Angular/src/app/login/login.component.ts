@@ -40,6 +40,7 @@ export class LoginComponent implements OnInit {
   setSessionFlag() {
     sessionStorage.setItem("setSessionFlag", "false");
     sessionStorage.removeItem("tokenValue") ;
+    sessionStorage.removeItem("employeeId");
   }
 
   authenticatePost(){
@@ -55,7 +56,7 @@ export class LoginComponent implements OnInit {
         console.log(tokenValue);
         sessionStorage.setItem("setSessionFlag", "true");
         sessionStorage.setItem("tokenValue",tokenValue);
-        this.router.navigate(['/home']);
+        this.router.navigate(['/employeelist']);
       });
     }
   }

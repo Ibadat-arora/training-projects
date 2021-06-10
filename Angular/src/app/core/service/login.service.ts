@@ -13,7 +13,7 @@ export class JwtService {
   constructor(private httpClient:HttpClient) { }
 
    login(loginRequest : LoginRequest ):Observable<LoginResponse>{
-    let url = environment.hosturl + '/authenticate';
+    let url = '/authenticate';
 
     return this.httpClient.post<LoginResponse>(url,loginRequest) ;
   }

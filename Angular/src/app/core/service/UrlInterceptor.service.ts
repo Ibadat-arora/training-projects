@@ -9,15 +9,18 @@ export class UrlInterceptor implements HttpInterceptor{
 
     intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
         const tokenValue = sessionStorage.getItem("tokenValue") ;
+        let authorizedRequest : HttpRequest<any> = request ;
 
         if(tokenValue) {
-           const clonedReq = request.clone({
+            authorizedRequest = request.clone({
                 headers : request.headers.set("Authorization","Bearer " + tokenValue ) 
             }) ;
-
-            return next.handle(clonedReq);
-        }else {
-          return next.handle(request);
         }
+
+        const finalRequest = authorizedRequest.clone({
+            url : `${environment.hosturl}` + authorizedRequest.url 
+        });
+
+        return next.handle(finalRequest);
     }
 }

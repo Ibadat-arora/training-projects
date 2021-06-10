@@ -12,15 +12,20 @@ import { environment } from 'src/environments/environment';
 export class EmployeeService {
     constructor(private httpClient: HttpClient) { }
 
-    getEmployeeById(employeeId: number):Observable<Employee> {
-        let url = environment.hosturl +'/employee/' + employeeId;
+    getEmployeeById(employeeId: string):Observable<Employee> {
+        let url = '/employee/' + employeeId;
 
         return this.httpClient.get<Employee>(url);
     }
 
     updateEmployeeData(employee : Employee):Observable<Boolean>{
-        let url = environment.hosturl + '/employee/' +  employee.id ;
+        let url = '/employee/' +  employee.id ;
 
         return this.httpClient.put<Boolean>(url,employee);
+    }
+
+    getAllEmployees():Observable<Employee[]>{
+        let url = '/employee' ;
+        return this.httpClient.get<Employee[]>(url) ;
     }
 }

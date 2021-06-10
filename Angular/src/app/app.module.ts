@@ -16,12 +16,15 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
 import { EmployeeCreateManage } from './employee-create-manage/employee-create-manage.component';
 import { UrlInterceptor } from './core/service/UrlInterceptor.service';
+import { EmployeeListComponent } from './employee-list/employee-list.component';
+import { MatTableModule } from '@angular/material/table';
 
 @NgModule({
   declarations: [
     AppComponent,
     EmployeeCreateManage,
-    LoginComponent
+    LoginComponent,
+    EmployeeListComponent
   ],
   imports: [
     AppRoutingModule,
@@ -35,7 +38,8 @@ import { UrlInterceptor } from './core/service/UrlInterceptor.service';
     MatSelectModule,
     ReactiveFormsModule,
     HttpClientModule,
-    MatSnackBarModule
+    MatSnackBarModule,
+    MatTableModule
   ],
   providers: [
     {
