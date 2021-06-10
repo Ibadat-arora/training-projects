@@ -25,9 +25,7 @@ export class EmployeeCreateManage implements OnInit {
     private formBuilder : FormBuilder,
     private jobProfileService : JobProfileService) {
       this.activatedRoute.params.subscribe(data => {
-        console.log(data);
         this.employeeId = data.id ;
-        console.log(this.employeeId);
       })
     }
 
@@ -41,7 +39,6 @@ export class EmployeeCreateManage implements OnInit {
 
   autoFillUserValues() { 
     this.snackBar.open("values will autofill","ok");
-    console.log(this.employeeId) ;
     this.employeeService.getEmployeeById(this.employeeId).subscribe((response : Employee)=> {
       this.employeeForm.patchValue(response) ;
     });
