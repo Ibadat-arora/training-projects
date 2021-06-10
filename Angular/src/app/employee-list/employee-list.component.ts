@@ -37,7 +37,6 @@ export class EmployeeListComponent implements OnInit {
   }
 
   ViewEmployeeDetails(employeeId : number ){
-    sessionStorage.setItem("employeeId",JSON.stringify(employeeId));
-    this.router.navigate(['/home']);
+    this.router.navigate(['/employee-create-manage',employeeId]);
   }
 }

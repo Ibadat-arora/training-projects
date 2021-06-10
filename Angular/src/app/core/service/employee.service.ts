@@ -12,7 +12,7 @@ import { environment } from 'src/environments/environment';
 export class EmployeeService {
     constructor(private httpClient: HttpClient) { }
 
-    getEmployeeById(employeeId: string):Observable<Employee> {
+    getEmployeeById(employeeId: number):Observable<Employee> {
         let url = '/employee/' + employeeId;
 
         return this.httpClient.get<Employee>(url);

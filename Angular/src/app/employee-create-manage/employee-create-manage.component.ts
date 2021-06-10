@@ -17,13 +17,19 @@ export class EmployeeCreateManage implements OnInit {
   
   jobProfiles : JobProfile[] = [] ;
   employeeForm : FormGroup = this.formBuilder.group(new Employee(),{formArray : false}) ;
-  
+  employeeId : number = 0 ;
   constructor(private activatedRoute: ActivatedRoute, 
     private router: Router, 
     private employeeService: EmployeeService,
     private snackBar: MatSnackBar,
     private formBuilder : FormBuilder,
-    private jobProfileService : JobProfileService) { }
+    private jobProfileService : JobProfileService) {
+      this.activatedRoute.params.subscribe(data => {
+        console.log(data);
+        this.employeeId = data.id ;
+        console.log(this.employeeId);
+      })
+    }
 
   ngOnInit(): void {
     this.validateSessionStorage();
@@ -35,10 +41,8 @@ export class EmployeeCreateManage implements OnInit {
 
   autoFillUserValues() { 
     this.snackBar.open("values will autofill","ok");
-    const employeeId: string | any = sessionStorage.getItem('employeeId');
-    employeeId !== null || employeeId === undefined ? JSON.parse(employeeId) : undefined;
-    console.log(employeeId) ;
-    this.employeeService.getEmployeeById(employeeId).subscribe((response : Employee)=> {
+    console.log(this.employeeId) ;
+    this.employeeService.getEmployeeById(this.employeeId).subscribe((response : Employee)=> {
       this.employeeForm.patchValue(response) ;
     });
   }
