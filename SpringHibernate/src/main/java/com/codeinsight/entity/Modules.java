@@ -1,6 +1,8 @@
 package com.codeinsight.entity;
 
 import java.util.Set;
+
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -9,26 +11,29 @@ import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="user_role")
-public class UserRole {
+@Table(name="modules")
+public class Modules {
+
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
-	private Integer id ;
-	private String roleName = "";
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Integer id;
 	
+	@Column
+	private String moduleName ;
+
 	public Integer getId() {
 		return id;
 	}
-	
+
 	public void setId(Integer id) {
 		this.id = id;
 	}
-	
-	public String getRoleName() {
-		return roleName;
+
+	public String getModuleName() {
+		return moduleName;
 	}
-	
-	public void setRoleName(String roleName) {
-		this.roleName = roleName;
+
+	public void setModuleName(String moduleName) {
+		this.moduleName = moduleName;
 	}
 }

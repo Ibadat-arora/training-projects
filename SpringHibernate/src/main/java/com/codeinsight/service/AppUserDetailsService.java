@@ -11,9 +11,15 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import com.codeinsight.bean.UiEmployee;
 import com.codeinsight.bean.UiUser;
 import com.codeinsight.dao.UserRepository;
+import com.codeinsight.dao.UserRolesModulesPermissionsRepository;
+import com.codeinsight.entity.Employee;
 import com.codeinsight.entity.UserEntity;
+import com.codeinsight.entity.UserRolesModulesPermissions;
+
+import antlr.collections.List;
 
 @Service
 
@@ -25,6 +31,9 @@ public class AppUserDetailsService implements UserDetailsService {
 	@Autowired
 	private PasswordEncoder bcryptEncoder;
 	
+	@Autowired
+	private UserRolesModulesPermissionsRepository userRolesModulesPermissionsRepository ;
+	
 	@Override
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 		UserEntity user = userRepository.findByUsername(username);
@@ -32,18 +41,22 @@ public class AppUserDetailsService implements UserDetailsService {
 		if (user == null) {
 			throw new UsernameNotFoundException("User not found with username: " + username);
 		}
+		
 		return new org.springframework.security.core.userdetails.User(user.getUsername(), user.getPassword(),
 				getGrantedAutority(user));
 	}
 	
 	private Collection<GrantedAuthority> getGrantedAutority(UserEntity user){
 		Collection<GrantedAuthority> authorities = new ArrayList<>();
+		Iterable<UserRolesModulesPermissions> userRolesModulesPermissionsList = userRolesModulesPermissionsRepository
+				.findAllByUserRole(user.getUserRole());
 		
-		if(user.getUserRole().getRoleName().equalsIgnoreCase("Admin")) {
-			authorities.add(new SimpleGrantedAuthority("ROLE_ADMIN"));
+		for (UserRolesModulesPermissions userRolesModulesPermissionsEntity : userRolesModulesPermissionsList) {
+			String moduleName = userRolesModulesPermissionsEntity.getModule().getModuleName() ;
+			String permissionName = userRolesModulesPermissionsEntity.getPermission().getPermissionName();
+			authorities.add(new SimpleGrantedAuthority(moduleName + '_' + permissionName));
 		}
 		
-		authorities.add(new SimpleGrantedAuthority("ROLE_USER"));
 		return authorities ;
 	}
 	
