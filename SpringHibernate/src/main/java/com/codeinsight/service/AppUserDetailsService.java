@@ -1,7 +1,10 @@
 package com.codeinsight.service;
 import java.util.ArrayList;
+import java.util.Collection;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -30,7 +33,18 @@ public class AppUserDetailsService implements UserDetailsService {
 			throw new UsernameNotFoundException("User not found with username: " + username);
 		}
 		return new org.springframework.security.core.userdetails.User(user.getUsername(), user.getPassword(),
-				new ArrayList<>());
+				getGrantedAutority(user));
+	}
+	
+	private Collection<GrantedAuthority> getGrantedAutority(UserEntity user){
+		Collection<GrantedAuthority> authorities = new ArrayList<>();
+		
+		if(user.getUserRole().getRoleName().equalsIgnoreCase("Admin")) {
+			authorities.add(new SimpleGrantedAuthority("ROLE_ADMIN"));
+		}
+		
+		authorities.add(new SimpleGrantedAuthority("ROLE_USER"));
+		return authorities ;
 	}
 	
 	public UserEntity save(UiUser userBean) {

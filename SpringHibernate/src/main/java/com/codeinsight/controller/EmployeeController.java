@@ -31,7 +31,7 @@ public class EmployeeController {
 		return employeeBeanList;
 	}
 	
-	@PreAuthorize("hasRole('Admin')")
+	@PreAuthorize("hasAuthority('ROLE_ADMIN')")
 	@PutMapping("/employee/{employeeId}")
 	public Boolean updateEmployeeData(@RequestBody UiEmployee employeeBean) {
 		 Boolean isValueUpdated = employeeService.updateEmployeeData(employeeBean);

@@ -50,13 +50,12 @@ public class EmployeeService {
 		return employeeBeanList;
 	}
 
+	
 	public Boolean updateEmployeeData(UiEmployee employeeBean) {
 		Optional<Employee> employeeEntityOptional = employeeRepository.findById(employeeBean.getId());
 		Boolean isValueUpdated = false;
-		Optional<UserRole> userRoleOptional = userRoleRepository.findById(employeeBean.getUserRoleId());
-		UserRole userRole = userRoleOptional.get();
 
-		if (employeeEntityOptional.isPresent() && userRole.getUserRole().equals("Admin")) {
+		if (employeeEntityOptional.isPresent()) {
 			Employee employeeEntity = employeeEntityOptional.get();
 			employeeEntity = setEntityClassAttributes(employeeBean, employeeEntity);
 			employeeRepository.save(employeeEntity);
