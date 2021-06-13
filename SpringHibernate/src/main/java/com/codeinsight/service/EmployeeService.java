@@ -21,9 +21,9 @@ public class EmployeeService {
 
 	@Autowired
 	private JobProfileRepository jobProfileRepository;
-
+	
 	@Autowired
-	private UserRoleRepository userRoleRepository;
+	private EmailService emailService ;
 
 	public UiEmployee getEmployeeById(Integer id) {
 		Optional<Employee> employeeEntityOptional = employeeRepository.findById(id);
@@ -61,6 +61,7 @@ public class EmployeeService {
 			employeeRepository.save(employeeEntity);
 
 			isValueUpdated = true;
+			emailService.sendEmail(employeeEntity.getEmail(),"Your Data has been Updated", "Data Updated");
 		}
 		
 		return isValueUpdated;
