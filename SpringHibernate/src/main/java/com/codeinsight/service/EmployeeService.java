@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 import com.codeinsight.bean.UiEmployee;
 import com.codeinsight.bean.UiUserRole;
@@ -50,7 +51,7 @@ public class EmployeeService {
 		return employeeBeanList;
 	}
 
-	
+	@Async
 	public Boolean updateEmployeeData(UiEmployee employeeBean) {
 		Optional<Employee> employeeEntityOptional = employeeRepository.findById(employeeBean.getId());
 		Boolean isValueUpdated = false;
