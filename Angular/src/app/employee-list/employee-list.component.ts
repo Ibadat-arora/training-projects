@@ -10,6 +10,7 @@ import { EmployeeService } from '../core/service/employee.service';
 })
 export class EmployeeListComponent implements OnInit {
   employeeList : Employee[] = [];
+  username : string = "" ;
 
   constructor(private employeeService: EmployeeService,
     private router: Router) { }
@@ -38,5 +39,23 @@ export class EmployeeListComponent implements OnInit {
 
   ViewEmployeeDetails(employeeId : number ){
     this.router.navigate(['/employee-create-manage',employeeId]);
+  }
+
+  Search(){
+    if(this.username==""){
+      this.getAllEmployees();
+    }else{
+      this.employeeList = this.employeeList.filter(response => {
+        let filterResults : any ;
+
+        if(response.firstName.toLocaleLowerCase().match(this.username.toLocaleLowerCase())){
+          filterResults = response.firstName.toLocaleLowerCase().match(this.username.toLocaleLowerCase())
+        }else if(response.lastName.toLocaleLowerCase().match(this.username.toLocaleLowerCase())){
+          filterResults = response.lastName.toLocaleLowerCase().match(this.username.toLocaleLowerCase())
+        }
+
+        return filterResults ;
+      })
+    }
   }
 }

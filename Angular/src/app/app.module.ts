@@ -18,6 +18,7 @@ import { EmployeeCreateManage } from './employee-create-manage/employee-create-m
 import { UrlInterceptor } from './core/service/UrlInterceptor.service';
 import { EmployeeListComponent } from './employee-list/employee-list.component';
 import { MatTableModule } from '@angular/material/table';
+import { Ng2SearchPipeModule } from 'ng2-search-filter';
 
 @NgModule({
   declarations: [
@@ -39,7 +40,8 @@ import { MatTableModule } from '@angular/material/table';
     ReactiveFormsModule,
     HttpClientModule,
     MatSnackBarModule,
-    MatTableModule
+    MatTableModule,
+    Ng2SearchPipeModule
   ],
   providers: [
     {
