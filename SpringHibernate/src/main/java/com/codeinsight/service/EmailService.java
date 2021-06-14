@@ -8,27 +8,47 @@ import javax.mail.Session;
 import javax.mail.Transport;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
+
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 @Service
 public class EmailService {
+	@Value("${mail.smtp.host}")
+	private String HOST;
 	
+	@Value("${mail.smtp.port}")
+	private String PORT ;
+	
+	@Value("${mail.smtp.ssl.enable}")
+	private String SSL_ENABLE;
+	
+	@Value("${mail.smtp.auth}")
+	private String SMTP_AUTH;
+	
+	@Value("${mail.smtp.starttls.enable}")
+	private String START_TLS_ENABLE; 
+	
+	@Value("${mail.username}")
+	private String USERNAME; 
+	
+	@Value("${mail.password}")
+	private String PASSWORD;
+
 	public void sendEmail(String reciever ,String emailBody, String subject) {
+		Properties properties = new Properties();
 		
-		String host="smtp.gmail.com";
-		Properties properties = System.getProperties();
-		
-		properties.put("mail.smtp.host", host);
-		properties.put("mail.smtp.port",.465);
-		properties.put("mailsmtp.ssl.enable","true");
-		properties.put("mail.smtp.auth", "true");
-		properties.put("mail.smtp.starttls.enable", "true");
+		properties.put("mail.smtp.host", HOST);
+		properties.put("mail.smtp.port",PORT);
+		properties.put("mailsmtp.ssl.enable",SSL_ENABLE);
+		properties.put("mail.smtp.auth", SMTP_AUTH);
+		properties.put("mail.smtp.starttls.enable", START_TLS_ENABLE);
 		
 		Session session = Session.getInstance(properties,new Authenticator() {
 
 			@Override
 			protected PasswordAuthentication getPasswordAuthentication() {
-				return new PasswordAuthentication("ibadat.arora@thecodeinsight.com","rraygjbeoolmqwlm");
+				return new PasswordAuthentication(USERNAME,PASSWORD);
 			}
 		});
 		

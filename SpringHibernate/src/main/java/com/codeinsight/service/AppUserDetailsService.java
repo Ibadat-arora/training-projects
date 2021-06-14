@@ -54,6 +54,7 @@ public class AppUserDetailsService implements UserDetailsService {
 		for (UserRolesModulesPermissions userRolesModulesPermissionsEntity : userRolesModulesPermissionsList) {
 			String moduleName = userRolesModulesPermissionsEntity.getModule().getModuleName() ;
 			String permissionName = userRolesModulesPermissionsEntity.getPermission().getPermissionName();
+			
 			authorities.add(new SimpleGrantedAuthority(moduleName + '_' + permissionName));
 		}
 		

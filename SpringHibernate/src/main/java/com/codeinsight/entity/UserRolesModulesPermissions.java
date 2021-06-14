@@ -19,13 +19,13 @@ public class UserRolesModulesPermissions {
 	
 	
 	@ManyToOne(cascade=CascadeType.ALL)
-	UserRole userRole ;
+	private UserRole userRole ;
 	
 	@ManyToOne(cascade=CascadeType.ALL)
-	Modules module ;
+	private Modules module ;
 	
 	@ManyToOne(cascade=CascadeType.ALL)
-	Permissions permission ;
+	private Permissions permission ;
 
 	public Integer getId() {
 		return id;
