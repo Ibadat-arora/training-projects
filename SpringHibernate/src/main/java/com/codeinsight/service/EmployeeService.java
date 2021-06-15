@@ -96,4 +96,30 @@ public class EmployeeService {
 
 		return employeeBean;
 	}
+
+	public List<UiEmployee> getAllEmployeesByFirstName(String firstName) {
+		// TODO Auto-generated method stub
+		Iterable<Employee> employeeList = employeeRepository.findByFirstName(firstName);
+		List<UiEmployee> employeeBeanList = new ArrayList<>();
+		
+		for (Employee employeeEntity : employeeList) {
+			UiEmployee employeeBean = setUiClassAttributes(employeeEntity);
+			employeeBeanList.add(employeeBean);
+		}
+
+		return employeeBeanList;
+	}
+
+	public List<UiEmployee> getAllEmployeesByLastName(String lastName) {
+		// TODO Auto-generated method stub
+		Iterable<Employee> employeeList = employeeRepository.findByLastName(lastName);
+		List<UiEmployee> employeeBeanList = new ArrayList<>();
+		
+		for (Employee employeeEntity : employeeList) {
+			UiEmployee employeeBean = setUiClassAttributes(employeeEntity);
+			employeeBeanList.add(employeeBean);
+		}
+
+		return employeeBeanList;
+	}
 }

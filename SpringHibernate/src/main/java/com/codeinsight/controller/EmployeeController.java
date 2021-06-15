@@ -1,8 +1,8 @@
 package com.codeinsight.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import com.codeinsight.bean.UiEmployee;
 import com.codeinsight.service.EmployeeService;
+import org.apache.commons.lang3.StringUtils;
 
 @RestController
 public class EmployeeController {
@@ -28,8 +29,18 @@ public class EmployeeController {
 	}
 
 	@GetMapping("/employee")
-	public @ResponseBody List<UiEmployee> getAllEmployees(@RequestParam(required = false) Map<String, String> queryParams) {
-		List<UiEmployee> employeeBeanList = employeeService.getAllEmployees();
+	public @ResponseBody List<UiEmployee> getAllEmployees(@RequestParam(required = false) String firstName ,
+			@RequestParam(required = false) String lastName) {
+		
+		List<UiEmployee> employeeBeanList = new ArrayList<>();
+		
+		if(!StringUtils.isEmpty(firstName)) {
+			employeeBeanList = employeeService.getAllEmployeesByFirstName(firstName);
+		}else if(!StringUtils.isEmpty(lastName)){
+			employeeBeanList = employeeService.getAllEmployeesByLastName(lastName);
+		}else {
+			employeeBeanList = employeeService.getAllEmployees();
+		}
 
 		return employeeBeanList;
 	}
