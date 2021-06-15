@@ -1,10 +1,14 @@
 <div class='row'>
     <div class='col-10 offset-1 m-t-4-p'>
         <h2>Employee List</h2>
-        
-        <div class="navbar">
-            <input class="form-control" type="text" name="username" [(ngModel)]="username" (ngModelChange)="Search()"
+
+        <div>
+            <input class="form-control" type="text" name="username" [(ngModel)]="username" 
             placeholder="Enter Username for search">
+        </div>
+        <div class = "m-t-1-p m-b-1-p">
+            <button mat-stroked-button class="btn btn-primary"
+            (click)="SearchUserName()">Search</button>
         </div>
 
         <table class="table table-hover table-bordered table-sm">

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Employee } from '../core/model/employee.model';
+import { EmployeeListService } from '../core/service/employee-list.service';
 import { EmployeeService } from '../core/service/employee.service';
 
 @Component({
@@ -11,9 +12,11 @@ import { EmployeeService } from '../core/service/employee.service';
 export class EmployeeListComponent implements OnInit {
   employeeList : Employee[] = [];
   username : string = "" ;
+  employee : Employee = new Employee;
 
   constructor(private employeeService: EmployeeService,
-    private router: Router) { }
+    private router: Router,
+    private employeeListService : EmployeeListService) { }
  
   ngOnInit(): void {
     this.validateSessionStorage();
@@ -41,15 +44,21 @@ export class EmployeeListComponent implements OnInit {
     this.router.navigate(['/employee-create-manage',employeeId]);
   }
 
-  Search(){
+  SearchUserName(){
     if(this.username==""){
       this.getAllEmployees();
     }else{
-      this.employeeList = this.employeeList.filter((response :Employee)=> 
-        response.firstName.toLocaleLowerCase().match(this.username.toLocaleLowerCase())
-             || response.lastName.toLocaleLowerCase().match(this.username.toLocaleLowerCase()) 
-
-      ) ;
+      for(this.employee of (this.employeeList)){
+        if(this.employee.firstName.toLocaleLowerCase() == this.username.toLocaleLowerCase()){
+          this.employeeListService.searchByFirstName(this.employee.firstName).subscribe(response =>{
+            this.employeeList = response ;
+          }) ;
+        }else if(this.employee.lastName.toLocaleLowerCase() == this.username.toLocaleLowerCase()){
+          this.employeeListService.searchByLastName(this.employee.lastName).subscribe(response =>{
+            this.employeeList = response ;
+          }) ;
+        }
+      }
     }
   }
 }
