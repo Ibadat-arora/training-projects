@@ -51,7 +51,6 @@ public class EmployeeService {
 		return employeeBeanList;
 	}
 
-	@Async
 	public Boolean updateEmployeeData(UiEmployee employeeBean) {
 		Optional<Employee> employeeEntityOptional = employeeRepository.findById(employeeBean.getId());
 		Boolean isValueUpdated = false;

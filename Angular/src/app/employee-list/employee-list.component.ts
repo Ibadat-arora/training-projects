@@ -45,17 +45,11 @@ export class EmployeeListComponent implements OnInit {
     if(this.username==""){
       this.getAllEmployees();
     }else{
-      this.employeeList = this.employeeList.filter(response => {
-        let filterResults : any ;
+      this.employeeList = this.employeeList.filter((response :Employee)=> 
+        response.firstName.toLocaleLowerCase().match(this.username.toLocaleLowerCase())
+             || response.lastName.toLocaleLowerCase().match(this.username.toLocaleLowerCase()) 
 
-        if(response.firstName.toLocaleLowerCase().match(this.username.toLocaleLowerCase())){
-          filterResults = response.firstName.toLocaleLowerCase().match(this.username.toLocaleLowerCase())
-        }else if(response.lastName.toLocaleLowerCase().match(this.username.toLocaleLowerCase())){
-          filterResults = response.lastName.toLocaleLowerCase().match(this.username.toLocaleLowerCase())
-        }
-
-        return filterResults ;
-      })
+      ) ;
     }
   }
 }

@@ -49,7 +49,7 @@ public class AppUserDetailsService implements UserDetailsService {
 	private Collection<GrantedAuthority> getGrantedAutority(UserEntity user){
 		Collection<GrantedAuthority> authorities = new ArrayList<>();
 		Iterable<UserRolesModulesPermissions> userRolesModulesPermissionsList = userRolesModulesPermissionsRepository
-				.findAllByUserRole(user.getUserRole());
+				.findAllByUserRoleId(user.getUserRole().getId());
 		
 		for (UserRolesModulesPermissions userRolesModulesPermissionsEntity : userRolesModulesPermissionsList) {
 			String moduleName = userRolesModulesPermissionsEntity.getModule().getModuleName() ;

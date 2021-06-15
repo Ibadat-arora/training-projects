@@ -1,12 +1,15 @@
 package com.codeinsight.controller;
 
 import java.util.List;
+import java.util.Map;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import com.codeinsight.bean.UiEmployee;
@@ -25,7 +28,7 @@ public class EmployeeController {
 	}
 
 	@GetMapping("/employee")
-	public @ResponseBody List<UiEmployee> getAllEmployees() {
+	public @ResponseBody List<UiEmployee> getAllEmployees(@RequestParam(required = false) Map<String, String> queryParams) {
 		List<UiEmployee> employeeBeanList = employeeService.getAllEmployees();
 
 		return employeeBeanList;

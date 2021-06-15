@@ -6,5 +6,5 @@ import com.codeinsight.entity.UserRole;
 import com.codeinsight.entity.UserRolesModulesPermissions;
 
 public interface UserRolesModulesPermissionsRepository extends JpaRepository<UserRolesModulesPermissions, Integer>{
-	Iterable<UserRolesModulesPermissions> findAllByUserRole(UserRole userRole);
+	Iterable<UserRolesModulesPermissions> findAllByUserRoleId(Integer user_role_id);
 }
