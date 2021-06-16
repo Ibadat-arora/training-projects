@@ -45,7 +45,7 @@ public class EmployeeController {
 		}else if(!StringUtils.isEmpty(email)) {
 			employeeBeanList = employeeService.getAllEmployeesByEmail(email);
 		}else if(jobProfileId!=null) {
-			employeeBeanList = employeeService.getAllEmployeesByJobProfileId(jobProfileId);
+			employeeBeanList = employeeService.getAllEmployeesByJobProfile(jobProfileId);
 		}else if(startDate!=null || endDate!=null) {
 			employeeBeanList = employeeService.getAllEmployeesByDate(startDate,endDate);
 		}else{

@@ -3,6 +3,9 @@ package com.codeinsight.dao;
 import java.util.Date;
 import java.util.List;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
@@ -21,8 +24,10 @@ public interface EmployeeRepository extends CrudRepository<Employee, Integer> {
 	Iterable<Employee> getAllEmployeesByEmail(String email);
 	
 	@Query("SELECT e FROM Employee e WHERE e.jobProfile.id =:jobProfileId")
-	Iterable<Employee> getAllEmployeesByJobProfileId(Integer jobProfileId);
+	Iterable<Employee> getAllEmployeesByJobProfile(Integer jobProfileId);
 	
 	@Query("SELECT e FROM Employee e WHERE e.dateOfJoining >=:startDate OR e.dateOfJoining <=:endDate")
 	Iterable<Employee> getAllEmployeesByDate(Date startDate,Date endDate);
+
+	Page<Employee> findAll(Pageable firstPageWithThreeElements);
 }

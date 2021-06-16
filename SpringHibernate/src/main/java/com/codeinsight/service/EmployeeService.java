@@ -5,6 +5,9 @@ import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 import com.codeinsight.bean.UiEmployee;
@@ -18,6 +21,7 @@ import com.codeinsight.entity.UserRole;
 
 @Service
 public class EmployeeService {
+	private final Integer NO_OF_RECORDS = 3 ;
 	@Autowired
 	private EmployeeRepository employeeRepository;
 
@@ -41,7 +45,9 @@ public class EmployeeService {
 	}
 
 	public List<UiEmployee> getAllEmployees() {
-		Iterable<Employee> employeeList = employeeRepository.findAll();
+		Pageable firstPageWithThreeElements = PageRequest.of(0, NO_OF_RECORDS);
+		
+		Page<Employee> employeeList = employeeRepository.findAll(firstPageWithThreeElements);
 		List<UiEmployee> employeeBeanList = new ArrayList<>();
 
 		for (Employee employeeEntity : employeeList) {
@@ -131,8 +137,8 @@ public class EmployeeService {
 		return employeeBeanList;
 	}
 
-	public List<UiEmployee> getAllEmployeesByJobProfileId(Integer jobProfileId) {
-		Iterable<Employee> employeeList = employeeRepository.getAllEmployeesByJobProfileId(jobProfileId);
+	public List<UiEmployee> getAllEmployeesByJobProfile(Integer jobProfileId) {
+		Iterable<Employee> employeeList = employeeRepository.getAllEmployeesByJobProfile(jobProfileId);
 		List<UiEmployee> employeeBeanList = new ArrayList<>();
 		
 		for (Employee employeeEntity : employeeList) {
