@@ -25,9 +25,6 @@ public class Employee {
 	@ManyToOne(cascade=CascadeType.ALL)
 	private JobProfile jobProfile;
 	
-	@ManyToOne(cascade=CascadeType.ALL)
-	private UserRole userRole;
-
 	public Integer getId() {
 		return id;
 	}
@@ -82,13 +79,5 @@ public class Employee {
 
 	public void setJobProfile(JobProfile jobProfile) {
 		this.jobProfile = jobProfile;
-	}
-	
-	public UserRole getUserRole() {
-		return userRole;
-	}
-
-	public void setUserRole(UserRole userRole) {
-		this.userRole = userRole;
 	}
 }

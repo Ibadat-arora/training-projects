@@ -10,8 +10,7 @@ public class UiEmployee {
 	private String email;
 	private Date dateOfJoining;
 	private Integer jobProfileId;
-	private Integer userRoleId;
-
+	
 	public Integer getId() {
 		return id;
 	}
@@ -66,13 +65,5 @@ public class UiEmployee {
 
 	public void setJobProfileId(Integer jobProfileId) {
 		this.jobProfileId = jobProfileId;
-	}
-
-	public Integer getUserRoleId() {
-		return userRoleId;
-	}
-
-	public void setUserRoleId(Integer userRoleId) {
-		this.userRoleId = userRoleId;
 	}
 }

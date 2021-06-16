@@ -1,6 +1,7 @@
 package com.codeinsight.service;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -91,15 +92,35 @@ public class EmployeeService {
 		JobProfile jobProfile = employeeEntity.getJobProfile();
 		employeeBean.setJobProfileId(jobProfile.getId());
 
-		UserRole userRole = employeeEntity.getUserRole();
-		employeeBean.setUserRoleId(userRole.getId());
-
 		return employeeBean;
 	}
 
-	public List<UiEmployee> getAllEmployeesByFirstName(String firstName) {
-		// TODO Auto-generated method stub
-		Iterable<Employee> employeeList = employeeRepository.findByFirstName(firstName);
+	public List<UiEmployee> getAllEmployeesByUserName(String userName) {
+		Iterable<Employee> employeeList = employeeRepository.getAllEmployeesByUserName(userName);
+		List<UiEmployee> employeeBeanList = new ArrayList<>();
+		
+		for (Employee employeeEntity : employeeList) {
+			UiEmployee employeeBean = setUiClassAttributes(employeeEntity);
+			employeeBeanList.add(employeeBean);
+		}
+
+		return employeeBeanList;
+	}
+	
+	public List<UiEmployee> getAllEmployeesByAddress(String address) {
+		Iterable<Employee> employeeList = employeeRepository.getAllEmployeesByAddress(address);
+		List<UiEmployee> employeeBeanList = new ArrayList<>();
+		
+		for (Employee employeeEntity : employeeList) {
+			UiEmployee employeeBean = setUiClassAttributes(employeeEntity);
+			employeeBeanList.add(employeeBean);
+		}
+
+		return employeeBeanList;
+	}
+	
+	public List<UiEmployee> getAllEmployeesByEmail(String email) {
+		Iterable<Employee> employeeList = employeeRepository.getAllEmployeesByEmail(email);
 		List<UiEmployee> employeeBeanList = new ArrayList<>();
 		
 		for (Employee employeeEntity : employeeList) {
@@ -110,9 +131,20 @@ public class EmployeeService {
 		return employeeBeanList;
 	}
 
-	public List<UiEmployee> getAllEmployeesByLastName(String lastName) {
-		// TODO Auto-generated method stub
-		Iterable<Employee> employeeList = employeeRepository.findByLastName(lastName);
+	public List<UiEmployee> getAllEmployeesByJobProfileId(Integer jobProfileId) {
+		Iterable<Employee> employeeList = employeeRepository.getAllEmployeesByJobProfileId(jobProfileId);
+		List<UiEmployee> employeeBeanList = new ArrayList<>();
+		
+		for (Employee employeeEntity : employeeList) {
+			UiEmployee employeeBean = setUiClassAttributes(employeeEntity);
+			employeeBeanList.add(employeeBean);
+		}
+
+		return employeeBeanList;
+	}
+	
+	public List<UiEmployee> getAllEmployeesByDate(Date startDate,Date endDate) {
+		Iterable<Employee> employeeList = employeeRepository.getAllEmployeesByDate(startDate,endDate);
 		List<UiEmployee> employeeBeanList = new ArrayList<>();
 		
 		for (Employee employeeEntity : employeeList) {
